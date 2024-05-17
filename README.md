@@ -79,4 +79,5 @@ MVP
     WebSocket  
   
 
-
+◼︎ 画面遷移図
+https://www.figma.com/design/8RkowsxKy5Fkpa7JYZUmoh/comedy_app?node-id=0%3A1&t=5QCHEB1fGTRvfwgN-1
