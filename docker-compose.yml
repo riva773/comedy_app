@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      RAILS_ENV: development
+      RAILS_ENV: production
     tty: true
     stdin_open: true
     depends_on:
