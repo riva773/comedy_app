@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.3.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+gem "rails", "7.1.3.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -27,11 +27,13 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'bootstrap-sass', '~> 3.3.6'
-
 gem 'sass-rails', '>= 3.2'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
+gem 'activesupport', '~> 7.1'
+
+
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
