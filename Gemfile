@@ -26,13 +26,15 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-gem 'bootstrap-sass', '~> 3.3.6'
-gem 'sass-rails', '>= 3.2'
+gem 'bootstrap', '~> 5.0.0'
+gem 'popper_js', '~> 2.0'
+gem 'sassc-rails', '>= 2.1.0'
+gem 'mini_racer'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 gem 'activesupport', '~> 7.1'
-
+gem 'devise'
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
