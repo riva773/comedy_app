@@ -7,12 +7,12 @@
 
         <div class="mb-3">
           <%= f.label :nickname, class: 'form-label' %>
-          <%= f.email_field :nickname, autofocus: true, autocomplete: "nickname", class: 'form-control', required: true %>
+          <%= f.email_field :nickname, autofocus: true, autocomplete: "nickname", class: 'form-control', required: true, placeholder: "ニックネームを入力してください" %>
         </div>
 
         <div class="mb-3">
           <%= f.label :email, class: 'form-label' %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', required: true, placeholder: "メールアドレスを入力してください" %>
         </div>
 
         <div class="mb-3">
@@ -22,12 +22,12 @@
             (<%= @minimum_password_length %> characters minimum)
           </small>
           <% end %>
-          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', required: true %>
+          <%= f.password_field :password, autocomplete: "new-password", class: 'form-control', required: true, placeholder: "パスワードを入力してください" %>
         </div>
 
         <div class="mb-3">
           <%= f.label :password_confirmation, class: 'form-label' %>
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control', required: true, placeholder: "パスワードを入力してください" %>
         </div>
 
         <div class="d-grid gap-2 text-center">
