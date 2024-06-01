@@ -59,7 +59,7 @@ COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /comedy_app /comedy_app
 
 # railsユーザーの所有権に変更
-RUN chown -R rails:rails /comedy_app
+RUN chown -R rails:rails /comedy_app /usr/local/bundle
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/comedy_app/bin/docker-entrypoint"]

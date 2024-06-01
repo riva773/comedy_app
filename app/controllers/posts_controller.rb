@@ -1,15 +1,17 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new]
   def index
     @posts = Post.all
   end
 
   def new
-    @user = current_user
+    @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
+      save_tags(@post,params[:tags])
       redirect_to posts_path
     else
       render :new
@@ -27,4 +29,14 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:user_id, :content, :genre, :privacy)
   end
+
+  def save_tags(post,tags_string)
+    tags=tags_string.split(',').map(&:strip).uniq
+
+    tags.each do |tag_name|
+        tag = Tag.find_or_create_by(name: tag_name)
+        PostTag.create(post: post, tag:tag)
+    end
+  end
+
 end
