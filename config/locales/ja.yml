@@ -1,0 +1,12 @@
+ja:
+  time:
+   formats:
+    default: "%Y/%m/%d %H:%M:%S"
+  activerecord:
+    errors:
+      models:
+        post:
+          attributes:
+            user:
+              required: "ユーザーが必要です"
+              blank: "ユーザーがからです"
