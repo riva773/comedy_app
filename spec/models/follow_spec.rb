@@ -1,5 +1,5 @@
 require 'rails_helper'
-format documentation
+
 
 RSpec.describe Follow, type: :model do
 	let(:user) { create(:user) }
@@ -34,7 +34,7 @@ RSpec.describe Follow, type: :model do
 
     it "自分自身をフォローできないこと" do
       # aが自分をフォローしようとした時にエラーが出ることを確認
-      expect { user.follow(user) }.to raise_error(AcriveRecord::RecordInvalid)
+      expect { user.follow(user) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 end
