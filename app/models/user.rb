@@ -2,8 +2,8 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
   has_many :followed_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
-  has_many :followings, through: following_relationships, source: followed
-  has_many :followeds, through: followed_relationships, source: following
+  has_many :followings, through: :following_relationships, source: :followed
+  has_many :followeds, through: :followed_relationships, source: :following
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
