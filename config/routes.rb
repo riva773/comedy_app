@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/show'
   resources :posts, only: %i[ new create destroy index]
   devise_for :users
 
