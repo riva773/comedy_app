@@ -1,10 +1,5 @@
-# 使いたいバージョンを決めて{{}}をruby:tag名の形で置き換えてください
-# 例: ARG RUBY_VERSION=ruby:3.2.2
 ARG RUBY_VERSION=ruby:3.3.0
-# {{}}を丸ごと使いたいnodeのversionに置き換えてください、小数点以下はいれないでください
-# 例: ARG NODE_VERSION=19
 ARG NODE_VERSION=20
-
 FROM $RUBY_VERSION
 ARG RUBY_VERSION
 ARG NODE_VERSION
@@ -15,12 +10,12 @@ RUN curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash - \
 && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
 && apt-get update -qq \
 && apt-get install -y build-essential nodejs yarn
-RUN mkdir /app
-WORKDIR /app
+RUN mkdir /comedy_app
+WORKDIR /comedy_app
 RUN gem install bundler
-COPY Gemfile /app/Gemfile
-COPY Gemfile.lock /app/Gemfile.lock
-COPY yarn.lock /app/yarn.lock
+COPY Gemfile /comedy_app/Gemfile
+COPY Gemfile.lock /comedy_app/Gemfile.lock
+COPY yarn.lock /comedy_app/yarn.lock
 RUN bundle install
 RUN yarn install
-COPY . /app
+COPY . /comedy_app
