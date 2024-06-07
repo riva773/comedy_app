@@ -1,5 +1,9 @@
 class User < ApplicationRecord
-  has_many :posts
+  has_many :posts, dependent: :destroy
+  has_many :following_relationships, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_relationships, class_name: "Follow", foreign_key: "followed_id", dependent: :destroy
+  has_many :followings, through: :following_relationships, source: :followed
+  has_many :followeds, through: :followed_relationships, source: :follower
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -11,6 +15,16 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
   validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }
 
+  def follow(user)
+    following_relationships.create!(followed_id: user.id)
+  end
 
+  def unfollow(user)
+    following_relationships.find_by(followed_id: user.id).destroy
+  end
+
+  def following?(user)
+    followings.include?(user)
+  end
 
 end

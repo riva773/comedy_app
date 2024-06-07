@@ -27,10 +27,18 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'bootstrap', '~> 5.0.0'
+
 gem 'popper_js', '~> 2.0'
+
 gem 'sassc-rails', '>= 2.1.0'
+
 gem 'mini_racer'
+
 gem 'i18n_generators'
+
+gem 'rspec-rails'
+
+gem 'factory_bot_rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
