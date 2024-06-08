@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :posts, only: %i[ new create destroy index]
   devise_for :users
+  root 'posts#index'
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
