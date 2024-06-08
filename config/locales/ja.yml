@@ -4,6 +4,8 @@ ja:
     default: "%Y/%m/%d %H:%M:%S"
   activerecord:
     errors:
+      messages:
+        record_invalid: "無効なレコードです"
       models:
         post:
           attributes:
