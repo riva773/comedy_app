@@ -9,6 +9,6 @@ class FollowsController < ApplicationController
   def destroy
     user = User.find(params[:user_id])
     current_user.unfollow(user)
-    redirect_to request.referer
+    redirect_to request.referer, stutus: :see_other
   end
 end

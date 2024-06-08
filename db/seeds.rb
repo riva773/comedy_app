@@ -7,3 +7,20 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+#
+5.times {
+  User.create!(
+    nickname: Faker::Name.name,
+    email: Faker::Internet.email,
+    password: "Password1",
+    password_confirmation: "Password1"
+  )
+}
+
+20.times do |index|
+  Post.create!(
+    user_id: User.offset(rand(User.count)).first.id,
+    content: "content_#{index}",
+    genre: Post.genres.keys.sample
+  )
+end
