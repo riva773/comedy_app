@@ -6,10 +6,15 @@
     <div class="col-md-3"></div>
     <div class="col-md-4 my-5">
       <h2>Edit profile</h2>
-      <% if resource.persisted? && resource.avatar.attached? %>
-        <%= image_tag resource.avatar %>
+      <% if @user.avatar.persisted? && @user.avatar.attached? %>
+        <%= image_tag @user.avatar, size: "100x100", class: "rounded-circle" %>
       <% end %>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, multipart: true }) do |f| %>
+      <% if resource.errors.any? %>
+        <%resource.errors.full_messages.each do |message| %>
+          <%= puts message %>
+        <%end%>
+      <%end%>
+      <%= form_with(model: @user, url: registration_path(resource_name), local: true, html: { method: :put, multipart: true }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="mb-3">
@@ -17,14 +22,12 @@
           <%= f.text_field :nickname, class: 'form-control' %>
         </div>
 
-        <% if @user.avatar.attached? %>
-        <% else %>
-          <div class="mb-3">
-            <%= f.label :avatar, class: 'form-label' %>
-            <%= f.file_field :avatar, class: 'form-control' %>
-          </div>
-        <% end %>
-
+        
+        <div class="mb-3">
+          <%= f.label :avatar, class: 'form-label' %>
+          <%= f.file_field :avatar, class: 'form-control' %>
+        </div>
+        
         <div class="mb-3">
           <%= f.label :profile, class: 'form-label' %>
           <%= f.text_area :profile, class: 'form-control' %>
