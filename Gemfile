@@ -46,6 +46,7 @@ gem 'webdrivers'
 
 gem 'faker'
 
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 gem 'activesupport', '~> 7.1'

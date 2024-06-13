@@ -13,7 +13,8 @@
     nickname: Faker::Name.name,
     email: Faker::Internet.email,
     password: "Password1",
-    password_confirmation: "Password1"
+    password_confirmation: "Password1",
+    avatar: Faker::Avatar.image
   )
 }
 
