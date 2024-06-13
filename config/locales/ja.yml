@@ -12,3 +12,8 @@ ja:
             user:
               required: "ユーザーが必要です"
               blank: "ユーザーがからです"
+        user:
+          attributes:
+            password:
+              blank: "パスワードを入力してください"
+              invalid: "パスワードが無効です"

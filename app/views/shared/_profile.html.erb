@@ -1,7 +1,7 @@
 <div class="border my-3">
   <div class="d-flex ms-3 align-items-center my-3">
     <%= image_tag 'dummy_profile_image', class: "rounded-circle ms-3" %>
-    <p class="ms-4">ユーザー名</p>
+    <p class="ms-4 my-auto">ユーザー名</p>
     
     <% if current_user != user %>
       <% if current_user.following?(user) %>

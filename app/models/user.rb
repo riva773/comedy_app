@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true, length: { maximum: 16 }
   validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }
+  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }, if: :password_required?
 
   def follow(user)
     following_relationships.create!(followed_id: user.id)
@@ -28,4 +28,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def password_required?
+    new_record? || password.present?
+  end
 end
