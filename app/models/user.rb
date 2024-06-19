@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :followeds, through: :followed_relationships, source: :follower
   has_one_attached :avatar
   has_many :likes, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
