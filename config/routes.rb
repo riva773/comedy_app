@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
-  resources :posts, only: %i[ new create destroy index]
+
+  resources :posts, only: %i[ new create destroy index] do
+    resource :likes, only: %i[create destroy]
+  end
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
   root 'posts#index'
+
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'

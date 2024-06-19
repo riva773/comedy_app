@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :followings, through: :following_relationships, source: :followed
   has_many :followeds, through: :followed_relationships, source: :follower
   has_one_attached :avatar
+  has_many :likes, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -31,4 +32,5 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
 end
