@@ -4,17 +4,18 @@
     <p class="ms-4 my-auto">ユーザー名</p>
     
     <% if current_user != user %>
+    <div class="ms-auto me-5">
       <% if current_user.following?(user) %>
-        <%= link_to "フォロー解除", user_follows_path(user), data: { turbo_method: "delete" }, class: "ms-auto me-5 btn btn-primary unfollow-btn" %>
+        <%= button_to "フォロー解除", user_follows_path(user), data: { turbo_method: :delete }, class: "ms-auto me-5 btn btn-primary unfollow-btn" %>
       <% else %>
-        <%= link_to "フォロー", user_follows_path(user), data: { turbo_method: "post" }, class: "ms-auto me-5 btn btn-primary follow_btn" %>
+        <%= button_to "フォロー", user_follows_path(user), data: { turbo_method: :post }, class: "ms-auto me-5 btn btn-primary follow_btn" %>
       <% end %>
-    <% else%>
+    </div>
+    <% else %>
       <%= link_to "#", class: "ms-auto" do %>
         <i class="bi bi-pencil-square me-5"></i>
       <% end %>
     <% end %>
-
   </div>
 
   <div class="container mb-3">

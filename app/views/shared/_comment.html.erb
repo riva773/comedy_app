@@ -1,0 +1,32 @@
+<% if comment.user.nil? %>
+  <p> comment.user is nil</p>
+<% else %>
+
+<div class="mb-3 container">
+  <div class="row">
+    <div class="col-md-1">
+      <%= image_tag comment.user.avatar, size: "50x50", class: "rounded-circle" if comment.user.avatar.attached? %>
+    </div>
+    <div class="col-md-11 my-auto">
+      <%= comment.user.nickname %>
+    </div>
+  </div>
+ 
+  <div class="row">
+    <div class="col-md-1">     
+    </div>
+    <div class="col-md-11">
+      <p><%= comment.content%></p>
+      <% if comment.files.attached? %>
+        <% comment.files.each do |file| %>
+          <% if file.image? %>
+            <%= image_tag file, size: "100x100" %>
+          <% elsif file.video? %>
+            <%= video_tag file, controls: true %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<% end %>
