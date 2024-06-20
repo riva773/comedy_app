@@ -14,9 +14,19 @@ class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   VALID_PASSWORD_REGEX = /\A(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{7,}\z/
 
-  validates :nickname, presence: true, length: { maximum: 16 }
-  validates :email, presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }
-  validates :password, presence: true, format: { with: VALID_PASSWORD_REGEX }, if: :password_required?
+  validates :nickname,
+     presence: true,
+     length: { maximum: 16, allow_blank: true }
+
+  validates :email,
+    presence: true,
+    uniqueness: true,
+    format: { with: VALID_EMAIL_REGEX, allow_blank: true }
+
+  validates :password,
+   presence: true,
+   format: { with: VALID_PASSWORD_REGEX, allow_blank: true },
+   if: :password_required?
 
   def follow(user)
     following_relationships.create!(followed_id: user.id)
@@ -33,5 +43,6 @@ class User < ApplicationRecord
   def password_required?
     new_record? || password.present?
   end
+
 
 end

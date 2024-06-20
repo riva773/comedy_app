@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <%= render partial: "shared/posts", locals: { post: @post }%>
       <%= render partial: "shared/comment_form", locals: { post: @post, comment: @comment }%>
-      <%= render partial: "shared/comments", locals: { post: @post, comment: @comment } %>
+      <%= render partial: "shared/comments", locals: { post: @post, comment: @comment, user: @user } %>
     </div>
     <div class="col-md-3">
       <%= render partial: "shared/form" %>

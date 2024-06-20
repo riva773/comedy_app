@@ -7,8 +7,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_permitted_parameters
-    account_update_added_attrs = [ :nickname, :avatar, :profile ]
-    devise_parameter_sanitizer.permit :account_update, keys: account_update_added_attrs
+    account_added_attrs = [ :nickname, :avatar, :profile ]
+    devise_parameter_sanitizer.permit :account_update, keys: account_added_attrs
+    devise_parameter_sanitizer.permit(:sign_up, keys: account_added_attrs)
   end
 
   def update_resource(resource, params)
