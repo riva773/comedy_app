@@ -4,6 +4,7 @@
       <%= render partial: "shared/sidebar" %>
     </div>
     <div class="col-md-6">
+      <%= render partial: "shared/search" %>
       <% @posts.each do |post| %>
         <%= link_to post_path(post), class: "d-block text-decoration-none custom-link" do %>
           <%= render partial: "shared/posts", locals: { post: post }%>
