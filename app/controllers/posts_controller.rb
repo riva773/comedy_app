@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new]
+
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true).includes(:user, :likes).order("created_at desc")
@@ -31,6 +32,7 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+
   private
 
   def post_params
@@ -45,5 +47,6 @@ class PostsController < ApplicationController
         PostTag.create(post: post, tag:tag)
     end
   end
+
 
 end

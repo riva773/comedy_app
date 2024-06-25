@@ -3,15 +3,12 @@ Rails.application.routes.draw do
   resources :posts, only: %i[new create destroy index show] do
     resource :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
-    collection do
-      get 'search', to: 'posts#search', as: :search
-      post 'search', to: 'posts#search'
-    end
   end
 
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
+
   root 'posts#index'
 
 
