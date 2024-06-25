@@ -1,10 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe "Follows", type: :system do
+RSpec.describe "Follows", js: true, type: :system do
   before do
     @user1 = create(:user)
     @user2 = create(:user)
   end
+
 
   describe 'フォロー機能' do
     it 'ユーザーをフォロー、フォロー解除できる' do

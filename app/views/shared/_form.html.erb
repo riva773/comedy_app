@@ -1,0 +1,31 @@
+<div class="container border">
+  <div class="row justify-content-center">
+    <div class="col-md-12 my-4">
+
+      <% if user_signed_in?%>
+       <%= render partial: "shared/user_avatar_nickname"  %>
+      <% end %>
+
+      <%= form_with model: @post do |f| %>
+        <div class="mb-3">
+          <%= f.label :content, class: 'form-label' %>
+          <%= f.text_area :content, class: 'form-control' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :genre, class: 'form-label' %>
+          <%= f.select :genre, Post.genres.keys.map,{}, class: 'form-select' %>
+        </div>
+
+        <div class="mb-3">
+          <%= f.label :tags,class: 'form-label' %>(カンマで複数個登録できます) <br />
+          <%= text_field_tag :tags, nil, class: 'form-control' %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit 'post', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

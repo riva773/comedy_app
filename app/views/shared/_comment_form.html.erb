@@ -1,0 +1,29 @@
+<div class="container border">
+  <div class="row justify-content-center">
+    <div class="col-md-12 my-4">
+
+      <% if user_signed_in? %>
+        <div class="d-flex mb-3 align-items-center">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar, size: "50x50", class: "rounded-circle" %>
+          <% else %>
+            <%= image_tag "dummy_profile_image", size: "50x50" %>
+          <% end %>
+          <p class="ms-3 ms-4 my-auto"><%= current_user.nickname %></p>
+        </div>
+      <% end %>
+
+      <%= form_with model: @comment, url: post_comments_path(@post), method: :post do |f| %>
+        <div class="mb-3">
+          <%= f.label :content, class: 'form-label' %>
+          <%= f.text_area :content, class: 'form-control mb-2' %>
+          <%= f.file_field :files, multiple: true %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit 'comment', class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

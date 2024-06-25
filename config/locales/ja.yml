@@ -1,12 +1,40 @@
 ja:
+  errors:
+    messages:
+      not_saved: "保存に失敗しました"
+      invalid: "無効です"
+      confirmation: "パスワードと一致しません"
+      too_short: "短すぎます"
+    attributes:
+      email:
+        invalid: "メールアドレスが無効です"
+      password_confirmation:
+        confirmation: "パスワードと一致しません"
+      password:
+        too_short: "パスワードが短すぎます"
   time:
-   formats:
-    default: "%Y/%m/%d %H:%M:%S"
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
   activerecord:
     errors:
+      messages:
+        invalid: "無効です"
+        record_invalid: "無効なレコードです"
+        too_short: "短すぎます"
       models:
         post:
           attributes:
             user:
               required: "ユーザーが必要です"
-              blank: "ユーザーがからです"
+              blank: "ユーザーが空です"
+        user:
+          invalid: "ユーザーが無効です"
+          attributes:
+            email:
+              invalid: "メールアドレスが無効です"
+            password:
+              blank: "パスワードを入力してください"
+              invalid: "パスワードが無効です"
+              too_short: "パスワードが短すぎます"
+            password_confirmation:
+              confirmation: "パスワードと一致しません"

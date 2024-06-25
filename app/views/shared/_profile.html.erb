@@ -1,20 +1,21 @@
 <div class="border my-3">
   <div class="d-flex ms-3 align-items-center my-3">
     <%= image_tag 'dummy_profile_image', class: "rounded-circle ms-3" %>
-    <p class="ms-4">ユーザー名</p>
+    <p class="ms-4 my-auto">ユーザー名</p>
     
     <% if current_user != user %>
+    <div class="ms-auto me-5">
       <% if current_user.following?(user) %>
         <%= button_to "フォロー解除", user_follows_path(user), method: :delete, class: "ms-auto me-5 btn btn-primary unfollow_btn" %>
       <% else %>
         <%= button_to "フォロー", user_follows_path(user), method: :post, class: "ms-auto me-5 btn btn-primary follow_btn" %>
       <% end %>
-    <% else%>
+    </div>
+    <% else %>
       <%= link_to "#", class: "ms-auto" do %>
         <i class="bi bi-pencil-square me-5"></i>
       <% end %>
     <% end %>
-
   </div>
 
   <div class="container mb-3">

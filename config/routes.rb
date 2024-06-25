@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
-  get 'users/show'
-  resources :posts, only: %i[ new create destroy index]
-  devise_for :users
+
+  resources :posts, only: %i[new create destroy index show] do
+    resource :likes, only: %i[create destroy]
+    resources :comments, only: %i[create destroy]
+  end
+  devise_for :users, controllers: {
+    registrations: "users/registrations"
+  }
+  root 'posts#index'
+
+
+
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
