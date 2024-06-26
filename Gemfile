@@ -50,6 +50,8 @@ gem 'byebug'
 
 gem 'image_processing', '~> 1.2'
 
+gem 'ransack'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
