@@ -11,6 +11,7 @@ Rails.application.configure do
   config.cache_classes = false
   config.reload_classes_only_on_change = true
   config.file_watcher = ActiveSupport::FileUpdateChecker
+  config.hosts << "www.example.com"
 
   # Do not eager load code on boot.
   config.eager_load = false
