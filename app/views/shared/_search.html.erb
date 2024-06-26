@@ -1,13 +1,11 @@
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center mb-3">
   <%= search_form_for @q, url: posts_path, method: :get, html: { class: 'd-flex align-items-center' } do |f| %>
     <div class="me-2">
-      <%= f.label :content_cont, '本文', class: 'form-label me-2' %>
-      <%= f.text_field :content_cont, class: 'form-control' %>
+      <%= f.text_field :content_cont, class: 'form-control', placeholder: '本文' %>
     </div>
     <div class="me-2">
-      <%= f.label :user_nickname_cont, 'ニックネーム', class: 'form-label me-2' %>
-      <%= f.text_field :user_nickname_cont, class: 'form-control' %>
+      <%= f.text_field :user_nickname_cont, class: 'form-control', placeholder: 'ニックネーム' %>
     </div>
-    <%= f.submit '検索', class: 'btn btn-primary' %>
+    <%= f.submit '検索', class: 'btn btn-primary align-self-end', placeholder: '検索' %>
   <% end %>
 </div>
