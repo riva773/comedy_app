@@ -17,11 +17,6 @@
           <%= f.select :genre, Post.genres.keys.map,{}, class: 'form-select' %>
         </div>
 
-        <div class="mb-3">
-          <%= label_tag :tag_name, 'タグ', class: 'form-label' %>(,区切りで複数個登録できます) <br/>
-          <%= text_field_tag :tag_name, tag_name, class: 'form-control' %>
-        </div>
-
         <div class="text-center">
           <%= f.submit 'post', class: "btn btn-primary" %>
         </div>
