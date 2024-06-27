@@ -17,15 +17,6 @@
     </div>
     <div class="col-md-11">
       <p><%= comment.content%></p>
-      <% if comment.files.attached? %>
-        <% comment.files.each do |file| %>
-          <% if file.image? %>
-            <%= image_tag file, size: "100x100" %>
-          <% elsif file.video? %>
-            <%= video_tag file, controls: true %>
-          <% end %>
-        <% end %>
-      <% end %>
     </div>
   </div>
 </div>

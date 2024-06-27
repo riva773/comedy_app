@@ -17,10 +17,9 @@
         <div class="mb-3">
           <%= f.label :content, class: 'form-label' %>
           <%= f.text_area :content, class: 'form-control mb-2' %>
-          <%= f.file_field :files, multiple: true %>
         </div>
 
-        <div class="text-center">
+        <div class="text-end">
           <%= f.submit 'comment', class: "btn btn-primary" %>
         </div>
       <% end %>
