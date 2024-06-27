@@ -36,13 +36,6 @@ class PostsController < ApplicationController
     params.require(:post).permit(:user_id, :content, :genre, :privacy)
   end
 
-  def save_tags(post,tags_string)
-    tags=tags_string.split(',').map(&:strip).uniq
 
-    tags.each do |tag_name|
-        tag = Tag.find_or_create_by(name: tag_name)
-        PostTag.create(post: post, tag:tag)
-    end
-  end
 
 end
