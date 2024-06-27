@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @new_post = Post.new
     @post = Post.includes(comments: :user).find(params[:id])
     @comment = @post.comments.new
     @user = @comment.user
@@ -18,10 +19,9 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      save_tags(@post,params[:tags])
       redirect_to posts_path
     else
-      render :new
+      render :index, status: :unprocessable_entity
     end
   end
 
@@ -36,15 +36,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :content, :genre, :privacy)
-  end
-
-  def save_tags(post,tags_string)
-    tags=tags_string.split(',').map(&:strip).uniq
-
-    tags.each do |tag_name|
-        tag = Tag.find_or_create_by(name: tag_name)
-        PostTag.create(post: post, tag:tag)
-    end
   end
 
 

@@ -15,3 +15,18 @@
 .custom-link:hover {
   color: black; 
 }
+
+.custom-badge {
+  display: inline-block;
+  padding: 0.5em 1em;
+  font-size: 0.9em;
+  color: #fff;
+  background-color: #F5CD0A;
+  border-radius: 1em;
+  margin-right: 0.2em;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}

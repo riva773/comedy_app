@@ -6,9 +6,9 @@
     <% if current_user != user %>
     <div class="ms-auto me-5">
       <% if current_user.following?(user) %>
-        <%= button_to "フォロー解除", user_follows_path(user), data: { turbo_method: :delete }, class: "ms-auto me-5 btn btn-primary unfollow-btn" %>
+        <%= button_to "フォロー解除", user_follows_path(user), method: :delete, class: "ms-auto me-5 btn btn-primary unfollow_btn" %>
       <% else %>
-        <%= button_to "フォロー", user_follows_path(user), data: { turbo_method: :post }, class: "ms-auto me-5 btn btn-primary follow_btn" %>
+        <%= button_to "フォロー", user_follows_path(user), method: :post, class: "ms-auto me-5 btn btn-primary follow_btn" %>
       <% end %>
     </div>
     <% else %>

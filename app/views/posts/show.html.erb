@@ -9,7 +9,7 @@
       <%= render partial: "shared/comments", locals: { post: @post, comment: @comment, user: @user } %>
     </div>
     <div class="col-md-3">
-      <%= render partial: "shared/form" %>
+      <%= render partial: "shared/form" , locals: { post: @new_post }%>
     </div>
   </div>
 </div>

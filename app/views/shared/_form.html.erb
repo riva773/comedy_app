@@ -6,7 +6,7 @@
        <%= render partial: "shared/user_avatar_nickname"  %>
       <% end %>
 
-      <%= form_with model: @post do |f| %>
+      <%= form_with model: post, local: true do |f| %>
         <div class="mb-3">
           <%= f.label :content, class: 'form-label' %>
           <%= f.text_area :content, class: 'form-control' %>
@@ -15,11 +15,6 @@
         <div class="mb-3">
           <%= f.label :genre, class: 'form-label' %>
           <%= f.select :genre, Post.genres.keys.map,{}, class: 'form-select' %>
-        </div>
-
-        <div class="mb-3">
-          <%= f.label :tags,class: 'form-label' %>(カンマで複数個登録できます) <br />
-          <%= text_field_tag :tags, nil, class: 'form-control' %>
         </div>
 
         <div class="text-center">
