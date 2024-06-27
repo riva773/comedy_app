@@ -44,5 +44,8 @@ class User < ApplicationRecord
     new_record? || password.present?
   end
 
+  def self.ransackable_attributes(auth_object = nil)
+    [ "nickname"]
+  end
 
 end

@@ -1,23 +1,30 @@
-
 <div class="border">
-  <div class="border">
-    <p><strong>投稿者：</strong> <%= post.user.nickname %></p>
-    <p><%= l post.created_at %>
-    <p><%= post.content %></p>
-  </div>
-  <div class="container">
-    <div class="row justify-content-end">
-      <div class="col-2">
-        <% if user_signed_in? && post.likes_by?(current_user) %>
-          <%= link_to post_likes_path(post), data: {turbo_method: "post"} do %>
-            <i class="bi bi-heart"></i>
-          <%end%>
-        <% else %>
-          <%= link_to post_likes_path(post), data: {turbo_method: "delete"} do %>
-            <i class="bi bi-heart-fill", style="color: red;"></i>
-          <% end %>
-        <% end %>
+  <div class="border mb-1">
+    <div class="m-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <%= render partial: "shared/user_avatar_nickname" %>
+        <p><%= l post.created_at %></p>
       </div>
+      <p><%= post.content %></p>
     </div>
   </div>
+  <div class="container-fluid mb-3">
+   <div class="row align-items-center">
+    <div class="d-flex">
+      <div class="flex-nowrap col-10">
+      </div>
+          <div class="col-2">
+            <% if user_signed_in? && post.likes_by?(current_user) %>
+              <%= button_to post_likes_path(post_id: post.id), data: {turbo_method: "delete"} do %>
+                <i class="bi bi-heart-fill", style="color: red;"></i>
+              <%end%>
+            <% else %>
+              <%= button_to post_likes_path(post), data: {turbo_method: "post"} do %>
+                <i class="bi bi-heart"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>

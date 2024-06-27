@@ -4,9 +4,11 @@ Rails.application.routes.draw do
     resource :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
   end
+
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
+
   root 'posts#index'
 
 
