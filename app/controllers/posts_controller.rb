@@ -4,8 +4,7 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).includes(:user, :likes, :tags).order("created_at desc")
-    @tag_name = params[:tag_name]
+    @posts = @q.result(distinct: true).includes(:user, :likes ).order("created_at desc")
   end
 
   def new
@@ -21,20 +20,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
-    tag_names = params[:tag_name].split(',')
-    tags = tag_names.map {| tag_name | Tag.find_or_initialize_by(name: tag_name) }
-    tags.each do |tag|
-      if tag.invalid?
-        @tag_name = params[:tag_name]
-        @post.errors.add(:tags, tag.errors.full_message.join("\n"))
-        return :index, status: :unprocessable_entity
-      end
-    end
     if @post.save
-      @post.tags = tags
       redirect_to posts_path
     else
-      @tag_name = params[:tag_name]
       render :index, status: :unprocessable_entity
     end
   end
@@ -50,15 +38,6 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :content, :genre, :privacy)
-  end
-
-  def save_tags(post,tags_string)
-    tags=tags_string.split(',').map(&:strip).uniq
-
-    tags.each do |tag_name|
-        tag = Tag.find_or_create_by(name: tag_name)
-        PostTag.create(post: post, tag:tag)
-    end
   end
 
 
