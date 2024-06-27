@@ -2,8 +2,10 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new]
 
   def index
+    @post = Post.new
     @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).includes(:user, :likes).order("created_at desc")
+    @posts = @q.result(distinct: true).includes(:user, :likes, :tags).order("created_at desc")
+    @tag_name = params[:tag_name]
   end
 
   def new
@@ -11,6 +13,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @new_post = Post.new
     @post = Post.includes(comments: :user).find(params[:id])
     @comment = @post.comments.new
     @user = @comment.user
@@ -18,11 +21,21 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    tag_names = params[:tag_name].split(',')
+    tags = tag_names.map {| tag_name | Tag.find_or_initialize_by(name: tag_name) }
+    tags.each do |tag|
+      if tag.invalid?
+        @tag_name = params[:tag_name]
+        @post.errors.add(:tags, tag.errors.full_message.join("\n"))
+        return :index, status: :unprocessable_entity
+      end
+    end
     if @post.save
-      save_tags(@post,params[:tags])
+      @post.tags = tags
       redirect_to posts_path
     else
-      render :new
+      @tag_name = params[:tag_name]
+      render :index, status: :unprocessable_entity
     end
   end
 
