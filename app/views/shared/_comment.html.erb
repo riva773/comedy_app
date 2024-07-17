@@ -1,14 +1,15 @@
 <% if comment.user.nil? %>
   <p> comment.user is nil</p>
 <% else %>
-
 <div class="mb-3 container">
   <div class="row">
     <div class="col-md-1">
-      <%= image_tag comment.user.avatar, size: "50x50", class: "rounded-circle" if comment.user.avatar.attached? %>
+      <%= link_to user_path(comment.user), class: "cutom-link" do %>
+        <%= image_tag comment.user.avatar, size: "50x50", class: "rounded-circle" if comment.user.avatar.attached? %>
+      <% end %>
     </div>
     <div class="col-md-11 my-auto">
-      <%= comment.user.nickname %>
+      <%= link_to comment.user.nickname, user_path(comment.user), class: "custom-link" %>
     </div>
   </div>
  
@@ -16,7 +17,7 @@
     <div class="col-md-1">     
     </div>
     <div class="col-md-11">
-      <p><%= comment.content%></p>
+      <p><%= comment.content %></p>
     </div>
   </div>
 </div>

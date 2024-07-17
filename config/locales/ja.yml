@@ -38,3 +38,8 @@ ja:
               too_short: "パスワードが短すぎます"
             password_confirmation:
               confirmation: "パスワードと一致しません"
+  devise:
+    failure:
+      not_found_in_database: "ユーザーが見つかりません"
+      user:
+        not_found_in_database: "ユーザーが見つかりません"

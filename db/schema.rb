@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_051826) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,13 +70,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "ogiri_topics", force: :cascade do |t|
+    t.string "image_url", default: "/comedy_app/public/images/yellow_bg.png", null: false
     t.bigint "user_id", null: false
-    t.string "content", null: false
-    t.integer "genre", null: false
-    t.integer "privacy", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content", null: false
+    t.index ["user_id"], name: "index_ogiri_topics_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "img_url", default: "/comedy_app/public/images/yellow_bg.png", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "ogiri_topic_id", null: false
+    t.text "content", null: false
+    t.index ["ogiri_topic_id"], name: "index_posts_on_ogiri_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -100,5 +110,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "ogiri_topics", "users"
+  add_foreign_key "posts", "ogiri_topics"
   add_foreign_key "posts", "users"
 end

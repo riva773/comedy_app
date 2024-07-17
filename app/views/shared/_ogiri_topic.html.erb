@@ -1,0 +1,9 @@
+<div class="card border custom-card">
+  <div class="card-body border_black">
+    <div class="mb-2 text-center">
+      <%= link_to ogiri_topic_path(ogiri_topic) do %>
+        <%= image_tag("/#{ogiri_topic.image_url}", class: 'img-fluid') if ogiri_topic.image_url.present? %>
+      <% end %>
+    </div>
+  </div>
+</div>

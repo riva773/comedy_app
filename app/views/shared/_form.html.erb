@@ -12,11 +12,6 @@
           <%= f.text_area :content, class: 'form-control' %>
         </div>
 
-        <div class="mb-3">
-          <%= f.label :genre, class: 'form-label' %>
-          <%= f.select :genre, Post.genres.keys.map,{}, class: 'form-select' %>
-        </div>
-
         <div class="text-center">
           <%= f.submit 'post', class: "btn btn-primary" %>
         </div>

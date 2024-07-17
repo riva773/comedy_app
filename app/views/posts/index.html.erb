@@ -1,17 +1,52 @@
 <div class="container-fluid">
   <div class="row my-4">
-    <div class="col-md-3 border-end">
+    <div class="col-md-2">
       <%= render partial: "shared/sidebar" %>
     </div>
-    <div class="col-md-6">
-      <% @posts.each do |post| %>
-        <%= link_to post_path(post), class: "d-block text-decoration-none custom-link" do %>
-          <%= render partial: "shared/posts", locals: { post: post }%>
+    <div class="col-md-8">
+      <div class="content bg-white p-4 rounded shadow-sm">
+        <div class="mb-3">
+          <%= form_with url: posts_path, method: :get, local: true, id: 'sort_form' do %>
+            <%= select_tag :sort, options_for_select([['日付順', 'recent'], ['人気順', 'popular'], ['フォロワーのみ', 'followers']], selected: params[:sort]), class: 'form-select', onchange: 'this.form.submit();' %>
+          <% end %>
+        </div>
+
+        <% @posts.each do |post| %>
+          <div class="post-card border rounded p-3 mb-4 bg-light">
+            <div class="post-header d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <%= link_to user_path(post.user), class: 'd-flex align-items-center text-decoration-none text-dark' do %>
+                  <%= render partial: "shared/user_avatar_nickname", locals: { user: post.user } %>
+                <% end %>
+              </div>
+              <p class="text-muted mb-0"><%= l post.created_at %></p>
+            </div>
+            <div class="post-body text-center mb-3">
+              <%= link_to post_path(post) do %>
+                <%= image_tag("/#{post.img_url}", class: 'img-fluid rounded') %>
+              <% end %>
+            </div>
+            <div class="post-footer d-flex justify-content-between align-items-center">
+              <div class="likes d-flex align-items-center">
+                <% if user_signed_in? && post.liked_by_user?(current_user) %>
+                  <%= button_to post_like_path(post, post.likes.find_by(user: current_user)), method: :delete, remote: true, class: 'btn btn-link p-0 text-danger' do %>
+                    <i class="bi bi-heart-fill"></i>
+                  <% end %>
+                <% else %>
+                  <%= button_to post_likes_path(post), remote: true, class: 'btn btn-link p-0 text-secondary' do %>
+                    <i class="bi bi-heart"></i>
+                  <% end %>
+                <% end %>
+                <p class="ms-2 mb-0"><%= post.likes_count %></p>
+              </div>
+              <div class="comments">
+                <%= link_to "コメントを見る", post_path(post), class: 'btn btn-outline-secondary' %>
+              </div>
+            </div>
+          </div>
         <% end %>
-      <% end %>
-    </div>
-    <div class="col-md-3">
-      <%= render partial: "shared/form", locals: { post: @post } %>
+      </div>
     </div>
   </div>
 </div>
+

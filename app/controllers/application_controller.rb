@@ -1,11 +1,15 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_search
+  before_action :authenticate_user!, only: :authenticated_root
 
-  def set_search
-    @q = Post.ransack(params[:q])
-    @posts = @q.result(distinct: true).includes(:user, :likes).order(created_at: :desc)
+  def after_sign_in_path_for(resource)
+    authenticated_root_path
   end
+
+  def after_sign_out_path_for(resource_or_scope)
+    unauthenticated_root_path
+  end
+
 
   protected
 

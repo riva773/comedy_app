@@ -1,26 +1,49 @@
 class Post < ApplicationRecord
+  after_create :generate_image_with_text
   belongs_to :user
+  belongs_to :ogiri_topic
   has_many :likes, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  validates :user,presence: true
-  validates :content, presence: true
-  validates :privacy, presence: true
-  validates :genre, presence: true
+  validates :user, presence: true
+  validates :img_url, presence: true
 
-  enum genre: { ogiri: 0, manzai: 1, cont: 2, variety_show: 3, gag: 4 }
-  enum privacy: { public_access: 0, private_access: 1, follower_only: 2 }
+  scope :recent, -> { order(created_at: :desc)}
+  scope :popular, -> { left_joins(:likes).group(:id).order('COUNT(likes.id) DESC') }
+  scope :by_followers, ->(user) { where(user_id: user.following_ids) }
+  scope :with_likes, ->(user) {
+    left_joins(:likes)
+      .select("posts.*, COUNT(likes.id) AS likes_count, MAX(CASE WHEN likes.user_id = #{user.id} THEN 1 ELSE 0 END) AS liked_by_user")
+      .group('posts.id')
+  }
 
-  def likes_by?(user)
+  def likes_count
+    likes.size
+  end
+
+  def liked_by_user?(user)
     likes.exists?(user_id: user.id)
   end
 
 
   def self.ransackable_attributes(auth_object = nil)
-    ["content", "created_at", "genre", "id", "privacy", "updated_at", "user_id", "nickname"]
+    ["content", "created_at", "id", "updated_at", "user_id", "nickname"]
   end
 
   def self.ransackable_associations(auth_object = nil)
     ["user"]
   end
+
+  def generate_image_with_text
+    output_dir = "#{Rails.root}/public/uploads/post/#{self.id}/"
+    FileUtils.mkdir_p(output_dir) unless File.directory?(output_dir)
+
+    img = ImageHelper.build_with_topic_and_response(self.ogiri_topic.content, self.content)
+
+    output_path = "#{output_dir}image.jpg"
+    img.write(output_path)
+    self.update(img_url: "uploads/post/#{self.id}/image.jpg")
+  end
+
+
 end
