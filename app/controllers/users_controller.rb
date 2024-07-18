@@ -3,5 +3,8 @@ class UsersController < ApplicationController
   def show
     @post = Post.new
     @user = User.find(params[:id])
+    @post_count = @user.posts.count
+    @follower_count = @user.followings.count
+    @followed_count = @user.followeds.count
   end
 end

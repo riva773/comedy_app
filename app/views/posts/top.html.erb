@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <%= image_tag 'Giriwara.png', size: '50x50' %>
+    </a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <%= link_to '会員登録', new_user_registration_path, class: 'btn btn-warning me-2' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-warning' %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+  <div>
+    <div class="row text-center">
+      <div class="col-md-12">
+        <%= image_tag 'ogiri_topic_creation.gif', class: 'img-fluid mb-3 content-box', size: "513x342" %>
+        <p class="gif-title">大喜利のお題を作成する</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row text-center">
+      <div class="col-md-12">
+        <%= image_tag 'ogiri_response.gif', class: 'img-fluid mb-3 content-box', size: "513x342" %>
+        <p class="gif-title">大喜利に回答する</p>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="row text-center">
+      <div class="col-md-12">
+        <%= image_tag 'follow_user.gif', class: 'img-fluid mb-3 content-box', size: "513x342" %>
+        <p class="gif-title">ユーザーをフォローする</p>
+      </div>
+    </div>
+  </div>
+</div>

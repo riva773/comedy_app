@@ -1,36 +1,50 @@
-<div class="border my-3">
-  <div class="d-flex ms-3 align-items-center my-3">
-    <%= image_tag 'dummy_profile_image', class: "rounded-circle ms-3" %>
-    <p class="ms-4 my-auto">ユーザー名</p>
-    
+<div class="profile-card border rounded p-4 mb-4 bg-light">
+  <div class="d-flex align-items-center mb-4">
+    <%= image_tag user.avatar, class: "rounded-circle", size: "75x75" %>
+    <h3 class="ms-4 my-auto"><%= user.nickname %></h3>
+
     <% if current_user != user %>
-    <div class="ms-auto me-5">
-      <% if current_user.following?(user) %>
-        <%= button_to "フォロー解除", user_follows_path(user), method: :delete, class: "ms-auto me-5 btn btn-primary unfollow_btn" %>
-      <% else %>
-        <%= button_to "フォロー", user_follows_path(user), method: :post, class: "ms-auto me-5 btn btn-primary follow_btn" %>
-      <% end %>
-    </div>
+      <div class="ms-auto">
+        <% if current_user.following?(user) %>
+          <%= button_to "フォロー解除", user_follows_path(user), method: :delete, class: "btn btn-danger unfollow_btn" %>
+        <% else %>
+          <%= button_to "フォロー", user_follows_path(user), method: :post, class: "btn btn-primary follow_btn" %>
+        <% end %>
+      </div>
     <% else %>
-      <%= link_to "#", class: "ms-auto" do %>
-        <i class="bi bi-pencil-square me-5"></i>
-      <% end %>
+      <div class="ms-auto">
+        <%= link_to edit_user_registration_path, class: "btn btn-outline-secondary" do %>
+          <i class="bi bi-pencil-square me-2"></i>編集
+        <% end %>
+      </div>
     <% end %>
   </div>
 
-  <div class="container mb-3">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div class="d-flex justify-content-between">
+  <div class="profile-stats mb-4">
+    <div class="row text-center">
+      <div class="col">
+        <div class="border p-2 rounded bg-white">
           <p>投稿</p>
+          <h5><%= post_count %></h5>
+        </div>
+      </div>
+      <div class="col">
+        <div class="border p-2 rounded bg-white">
           <p>フォロー</p>
+          <h5><%= followed_count %></h5>
+        </div>
+      </div>
+      <div class="col">
+        <div class="border p-2 rounded bg-white">
           <p>フォロワー</p>
+          <h5><%= follower_count %></h5>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="mb-3 mx-5">
-    <p>プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示プロフィール文章がここに表示</p>
+  <div class="profile-bio p-3 border rounded bg-white">
+    <h5>プロフィール</h5>
+    <p><%= user.profile %></p>
   </div>
 </div>

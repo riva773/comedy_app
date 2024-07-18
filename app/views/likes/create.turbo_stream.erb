@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "post_#{@post.id}_like" do %>
+  <%= render partial: "shared/posts", locals: { post: @post, current_user: current_user } %>
+<% end %>

@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
 
   resources :posts, only: %i[new create destroy index show] do
-    resource :likes, only: %i[create destroy]
+    resources :likes, only: %i[create destroy]
     resources :comments, only: %i[create destroy]
   end
+
+  resources :ogiri_topics, only: %i[create index show]
 
   devise_for :users, controllers: {
     registrations: "users/registrations"
   }
 
-  root 'posts#index'
+  authenticated :user do
+    root 'posts#index', as: :authenticated_root
+  end
 
-
-
+  unauthenticated do
+    root 'posts#top', as: :unauthenticated_root
+  end
 
   devise_scope :user do
     get 'sign_in', to: 'devise/sessions#new'
@@ -27,5 +32,7 @@ Rails.application.routes.draw do
       get 'followings', to: 'follows#followings'
       get 'followers', to: 'follows#followers'
   end
+
+  resources :likes, only: %i[index]
 
 end

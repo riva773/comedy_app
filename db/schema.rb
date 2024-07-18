@@ -1,17 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
-# of editing this file, please use the migrations feature of Active Record to
-# incrementally modify your database, and then regenerate this schema definition.
-#
-# This file is the source Rails uses to define your schema when running `bin/rails
-# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
-# be faster and is potentially less error prone than running all of your
-# migrations from scratch. Old migrations may fail to apply correctly if those
-# migrations use external dependencies or application code.
-#
-# It's strongly recommended that you check this file into your version control system.
-
-ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema[7.1].define(version: 2024_07_12_051826) do
   enable_extension "plpgsql"
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -70,13 +57,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "ogiri_topics", force: :cascade do |t|
+    t.string "image_url", default: "/comedy_app/public/images/yellow_bg.png", null: false
     t.bigint "user_id", null: false
-    t.string "content", null: false
-    t.integer "genre", null: false
-    t.integer "privacy", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "content", null: false
+    t.index ["user_id"], name: "index_ogiri_topics_on_user_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "img_url", default: "/comedy_app/public/images/yellow_bg.png", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "ogiri_topic_id", null: false
+    t.text "content", null: false
+    t.index ["ogiri_topic_id"], name: "index_posts_on_ogiri_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -100,5 +97,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_26_054025) do
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
+  add_foreign_key "ogiri_topics", "users"
+  add_foreign_key "posts", "ogiri_topics"
   add_foreign_key "posts", "users"
 end

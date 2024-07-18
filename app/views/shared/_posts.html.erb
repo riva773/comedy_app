@@ -2,29 +2,36 @@
   <div class="border mb-1">
     <div class="m-3">
       <div class="d-flex justify-content-between align-items-center">
-        <%= render partial: "shared/user_avatar_nickname" %>
+        <%= render partial: "shared/user_avatar_nickname", locals: { user: post.user } %>
         <p><%= l post.created_at %></p>
       </div>
-      <p><%= post.content %></p>
+      <div class="d-flex justify-content-center">
+        <%= link_to post_path(post) do %>
+          <%= image_tag("/#{post.img_url}") %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="container-fluid mb-3">
-   <div class="row align-items-center">
-    <div class="d-flex">
-      <div class="flex-nowrap col-10">
-      </div>
-          <div class="col-2">
-            <% if user_signed_in? && post.likes_by?(current_user) %>
-              <%= button_to post_likes_path(post_id: post.id), data: {turbo_method: "delete"} do %>
-                <i class="bi bi-heart-fill", style="color: red;"></i>
-              <%end%>
+    <div class="row align-items-center">
+      <div class="d-flex">
+        <div class="flex-nowrap col-10">
+        </div>
+        <div class="col-2 d-flex">
+          <%= turbo_frame_tag "post_#{post.id}_like" do %>
+            <% if user_signed_in? && post.liked_by_user?(current_user) %>
+              <%= button_to post_like_path(post, post.likes.find_by(user: current_user)), method: :delete, data: { turbo_frame: "post_#{post.id}_like" } do %>
+                <i class="bi bi-heart-fill" style="color: red;"></i>
+              <% end %>
             <% else %>
-              <%= button_to post_likes_path(post), data: {turbo_method: "post"} do %>
+              <%= button_to post_likes_path(post), data: { turbo_frame: "post_#{post.id}_like" } do %>
                 <i class="bi bi-heart"></i>
               <% end %>
             <% end %>
-          </div>
+            <p class="ms-2"><%= post.likes.size %></p>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
 </div>

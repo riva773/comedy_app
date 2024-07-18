@@ -1,8 +1,17 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new]
 
+  def top;  end
+
   def index
-    @posts = Post.includes(:user)
+    @posts = case params[:sort]
+             when 'followers'
+               Post.by_followers(current_user).with_likes(current_user).includes(:user)
+             when 'popular'
+               Post.popular.with_likes(current_user).includes(:user)
+             else
+               Post.recent.with_likes(current_user).includes(:user)
+             end
   end
 
   def new
@@ -10,14 +19,17 @@ class PostsController < ApplicationController
   end
 
   def show
-    @new_post = Post.new
-    @post = Post.includes(comments: :user).find(params[:id])
-    @comment = @post.comments.new
-    @user = @comment.user
+      @new_post = Post.new
+      @post = Post.with_likes(current_user).includes(comments: :user).find(params[:id])
+      @comment = @post.comments.new
+      @comments = @post.comments.includes(:user)
   end
 
   def create
-    @post = current_user.posts.new(post_params)
+    @post = Post.new(post_params)
+    @post.user = current_user
+    @ogiri_topic = OgiriTopic.find(post_params[:ogiri_topic_id])
+
     if @post.save
       redirect_to posts_path
     else
@@ -31,10 +43,9 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
-
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :content, :genre, :privacy)
+    params.require(:post).permit(:user_id, :img_url, :content, :ogiri_topic_id)
   end
 end
