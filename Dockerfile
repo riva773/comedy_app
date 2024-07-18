@@ -19,3 +19,5 @@ COPY yarn.lock /comedy_app/yarn.lock
 RUN bundle install
 RUN yarn install
 COPY . /comedy_app
+
+EXPOSE 3000
