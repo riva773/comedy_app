@@ -3,6 +3,7 @@ class OgiriTopic < ApplicationRecord
   belongs_to :user
   has_many :posts, dependent: :destroy
   validates :image_url, presence: true
+  validates :content, presence: true, length: { maximum: 42 }
 
   def generate_image_with_text
     output_dir = "#{Rails.root}/public/uploads/ogiri_topic/#{self.id}/"

@@ -21,8 +21,11 @@
           <%= form_with model: @post, url: posts_path, method: :post, local: true, class: "border border-radius p-3" do |form| %>
             <div class="mb-3">
               <%= form.hidden_field :ogiri_topic_id, value: @ogiri_topic.id %>
-              <%= form.label :content, "大喜利の回答", class: "form-label" %>
-              <%= form.text_area :content, class: "form-control" %>
+              <div class="d-flex justify-content-between align-items-center">
+                <%= form.label :content, "大喜利の回答", class: "form-label" %>
+                <p class="text-muted">(28文字まで)</p>
+              </div>
+              <%= form.text_area :content, class: "form-control", maxlength: "28" %>
             </div>
 
             <div class="d-grid gap-2">

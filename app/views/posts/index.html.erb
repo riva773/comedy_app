@@ -1,9 +1,9 @@
-<div class="container-fluid">
-  <div class="row my-4">
-    <div class="col-md-2">
+<div class="container-fluid mt-5">
+  <div class="row">
+    <div class="col-md-2 col-sm-12">
       <%= render partial: "shared/sidebar" %>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-8 col-sm-12">
       <div class="content bg-white p-4 rounded shadow-sm">
         <div class="mb-3">
           <%= form_with url: posts_path, method: :get, local: true, id: 'sort_form' do %>
@@ -49,4 +49,3 @@
     </div>
   </div>
 </div>
-
