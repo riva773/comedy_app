@@ -7,6 +7,8 @@ class Post < ApplicationRecord
 
   validates :user, presence: true
   validates :img_url, presence: true
+  validates :content, presence: true, length: { maximum: 28 }
+
 
   scope :recent, -> { order(created_at: :desc)}
   scope :popular, -> { left_joins(:likes).group(:id).order('COUNT(likes.id) DESC') }
@@ -23,15 +25,6 @@ class Post < ApplicationRecord
 
   def liked_by_user?(user)
     likes.exists?(user_id: user.id)
-  end
-
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["content", "created_at", "id", "updated_at", "user_id", "nickname"]
-  end
-
-  def self.ransackable_associations(auth_object = nil)
-    ["user"]
   end
 
   def generate_image_with_text
