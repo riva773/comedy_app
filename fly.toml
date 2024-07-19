@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for comedy-app-winter-bush-1721 on 2024-07-19T15:44:12+09:00
+# fly.toml app configuration file generated for comedy-app-winter-bush-1721 on 2024-07-19T16:47:50+09:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -10,7 +10,7 @@ console_command = '/rails/bin/rails console'
 [build]
 
 [http_service]
-  internal_port = 3000
+  internal_port = 3001
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true

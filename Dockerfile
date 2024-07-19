@@ -1,6 +1,6 @@
-ARG RUBY_VERSION=ruby:3.3.0
+ARG RUBY_VERSION=3.3.0
 ARG NODE_VERSION=20
-FROM $RUBY_VERSION
+FROM ruby:${RUBY_VERSION}
 ARG RUBY_VERSION
 ARG NODE_VERSION
 ENV LANG C.UTF-8
@@ -20,6 +20,6 @@ RUN bundle install
 RUN yarn install
 COPY . /comedy_app
 
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
