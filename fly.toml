@@ -1,9 +1,10 @@
-app = 'comedy-app-winter-bush-1721'
+app = 'comedy-app-silent-pond-6767'
 primary_region = 'nrt'
 console_command = '/rails/bin/rails console'
 
 [build]
   dockerfile = "Dockerfile"
+
 
 [http_service]
   internal_port = 3000
