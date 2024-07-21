@@ -1,14 +1,10 @@
-# fly.toml app configuration file generated for comedy-app on 2024-07-19T22:25:11+09:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
-app = 'comedy-app'
+app = 'comedy-app-silent-pond-6767'
 primary_region = 'nrt'
 console_command = '/rails/bin/rails console'
 
 [build]
   dockerfile = "Dockerfile"
+
 
 [http_service]
   internal_port = 3000
